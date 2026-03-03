@@ -1,0 +1,401 @@
+:root {
+  --bg: #0b1020;
+  --panel: rgba(255, 255, 255, 0.06);
+  --panel-border: rgba(255, 255, 255, 0.12);
+  --text: rgba(255, 255, 255, 0.92);
+  --muted: rgba(255, 255, 255, 0.65);
+
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, sans-serif;
+  line-height: 1.35;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+}
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.app {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.appContent {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.controls {
+  position: sticky;
+  top: 16px;
+  z-index: 10;
+  background: linear-gradient(to bottom, rgba(11, 16, 32, 0.95), rgba(11, 16, 32, 0.75));
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  padding: 12px 12px 10px;
+  backdrop-filter: blur(10px);
+  width: 320px;
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+}
+
+.controlsRow {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.buttonRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+button {
+  border-radius: 10px;
+  border: 1px solid var(--panel-border);
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+button[aria-pressed="true"] {
+  border-color: rgba(0, 232, 137, 0.65);
+  background: rgba(0, 232, 137, 0.18);
+  color: rgba(255, 255, 255, 0.98);
+}
+
+.modeToggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.speed label {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.speed input[type="range"] {
+  width: 100%;
+}
+
+.toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.toggles label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mazeControls {
+  margin-top: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.graphControls {
+  margin-top: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.mazeFields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.mazeField {
+  display: grid;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.mazeFieldRange {
+  grid-column: 1 / -1;
+}
+
+.mazeField input[type="number"] {
+  border-radius: 10px;
+  border: 1px solid var(--panel-border);
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+}
+
+.mazeField input[type="number"]:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.55);
+  outline-offset: 2px;
+}
+
+.mazeField select {
+  border-radius: 10px;
+  border: 1px solid var(--panel-border);
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text);
+}
+
+.mazeField select:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.55);
+  outline-offset: 2px;
+}
+
+.mazeRange {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mazeRange input[type="range"] {
+  width: 100%;
+}
+
+.mazeActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mazeHint {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.legend {
+  margin-top: 10px;
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.legendTitle {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.legendItems {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+}
+
+.swatch {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.swatch .box {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.22);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.gridSingle {
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+}
+
+.gridSingle .card {
+  width: min(1200px, 100%);
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  padding: 12px;
+  min-width: 0;
+}
+
+.cardClickable {
+  cursor: pointer;
+}
+
+.cardClickable:hover {
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.cardClickable:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.55);
+  outline-offset: 2px;
+}
+
+.detailHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.detailTitle {
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.detailControls {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.detailControls input[type="range"] {
+  width: 160px;
+}
+
+.detailZoomValue {
+  min-width: 4ch;
+  text-align: right;
+  color: var(--text);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  gap: 10px;
+}
+
+.cardTitle {
+  font-weight: 650;
+}
+
+.status {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: var(--muted);
+}
+
+.status-RUNNING {
+  color: rgba(255, 255, 255, 0.92);
+  border-color: rgba(255, 255, 255, 0.26);
+}
+
+.status-FOUND {
+  color: rgba(0, 232, 137, 1);
+  border-color: rgba(0, 232, 137, 0.4);
+}
+
+.status-NO_SOLUTION {
+  color: rgba(255, 93, 93, 1);
+  border-color: rgba(255, 93, 93, 0.35);
+}
+
+canvas {
+  display: block;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.mazeViewport {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.metrics {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 10px;
+  font-size: 12px;
+}
+
+.metric {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--muted);
+}
+
+.metric span:last-child {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 1250px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .mazeFields {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1100px) {
+  .app {
+    flex-direction: column;
+  }
+  .controls {
+    position: static;
+    width: 100%;
+    max-height: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .mazeFields {
+    grid-template-columns: 1fr;
+  }
+}
