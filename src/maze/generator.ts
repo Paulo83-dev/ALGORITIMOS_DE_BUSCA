@@ -79,7 +79,7 @@ export function generateMaze({ rows, cols, braidFactor }: GenerateOptions): Maze
 
 export function addTraffic(maze: MazeModel, probabilityPercent: number): MazeModel {
   const percent = clamp(probabilityPercent, 0, 100);
-  const grid = maze.grid.map((row) => row.map((cell) => (cell === CELL_WALL ? CELL_WALL : CELL_PATH)));
+  const grid: number[][] = maze.grid.map((row) => row.map((cell) => (cell === CELL_WALL ? CELL_WALL : CELL_PATH)));
   const candidates: Array<{ r: number; c: number }> = [];
 
   for (let r = 0; r < maze.rows; r++) {
